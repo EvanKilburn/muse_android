@@ -56,6 +56,8 @@ public class fetchArticleData extends AsyncTask{
             String id;
             String slug;
             String content;
+            //String author;
+            //String date;
             for (int i = 0; i < JA.length(); i++){
                 JSONObject JO = (JSONObject) JA.get(i);
                 title = "" + JO.get("title");
@@ -71,8 +73,6 @@ public class fetchArticleData extends AsyncTask{
                 image = "" + JO.get("jetpack_featured_media_url");
                 Article a = new Article(id, title, content, slug, image);
                 articles.add(a);
-                System.out.println("\n" + a.getTitle() + "\n");
-
             }
 
         } catch(MalformedURLException e){

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.view.menu.MenuView;
+import androidx.core.text.HtmlCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -40,6 +43,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
     @Override
     public ArticleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = mInflater.inflate(R.layout.article_preview, parent, false);
+
 //        if (page.equals("n")){
 //            v = mInflater.inflate(R.layout.article_preview, parent, false);
 //        } else{
@@ -66,6 +70,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         String text = a.getTitle();
         String imageURL = a.getImage();
         holder.article_text.setText(text);
+
 //        ImageView temp;
         Glide.with(c).load(imageURL).into(holder.article_image);
 //        holder.article_image.setImageDrawable(temp.getDrawable());
@@ -87,6 +92,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
             article_image = itemView.findViewById(R.id.imageView);
         }
     }
+
 //    protected Bitmap getArticleImage(String url) {
 //        String urldisplay = url;
 //        Bitmap mIcon11 = null;
