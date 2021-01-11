@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.muse_android.adapters.ArticleAdapter;
+import com.example.muse_android.adapters.FullArticleAdapter;
 import com.example.muse_android.objects.Article;
 
 import com.example.muse_android.requests.fetchArticleData;
@@ -27,18 +30,52 @@ public class MainActivity extends AppCompatActivity {
     public static RecyclerView.LayoutManager mLayoutManager;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.splash);
 
-        loadNewArticles();
+        Thread welcomeThread = new Thread() {
 
-        mRecyclerView = findViewById(R.id.recyclerView);
-//        mRecyclerView.setHasFixedSize(true);
+            @Override
+            public void run() {
+                try {
+                    super.run();
+                    sleep(10000);  //Delay of 10 seconds
+                } catch (Exception e) {
+
+                } finally {
+
+                    Intent i = new Intent(MainActivity.this,
+                            CategoriesActivity.class);
+                    startActivity(i);
+                    finish();
+                }
+            }
+        };
+        welcomeThread.start();
+    }
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_main);
+//        getSupportActionBar().hide();
+//        loadNewArticles();
+//        mRecyclerView = findViewById(R.id.recyclerView);
+////        mRecyclerView.setHasFixedSize(true);
+//        mLayoutManager = new LinearLayoutManager(this);
+//        mAdapter = new ArticleAdapter(this, newArticles);
+//        mRecyclerView.setLayoutManager(mLayoutManager);
+//        mRecyclerView.setAdapter(mAdapter);
+//
+//    }
+
+    private void articleSelected(Article selected) {
+        List<Article> selectedArticle = new ArrayList<>();
+        selectedArticle.add(selected);
         mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new ArticleAdapter(this, newArticles);
+        mAdapter = new FullArticleAdapter(this, selectedArticle);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+
     }
 
     private void loadNewArticles(){
@@ -51,6 +88,11 @@ public class MainActivity extends AppCompatActivity {
 //        } catch (MalformedURLException e){
 //            e.printStackTrace();
 //        }
+//            toCategoriesPage(this.findViewById(R.id.mainLayout).getRootView());
+    }
 
+    public void toCategoriesPage(View view) {
+        Intent intent = new Intent(MainActivity.this, CategoriesActivity.class);
+        startActivity(intent);
     }
 }
