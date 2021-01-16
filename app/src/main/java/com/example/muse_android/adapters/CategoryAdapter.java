@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.example.muse_android.CategoriesActivity;
 import com.example.muse_android.R;
 import com.example.muse_android.objects.CategoryArticle;
+import com.littlemango.stacklayoutmanager.StackLayoutManager;
 
 import java.util.ArrayList;
 
@@ -55,13 +56,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public static class ViewHolderCarousel extends RecyclerView.ViewHolder {
         public RecyclerView.Adapter carouselAdapter;
-        public LinearLayoutManager carouselLayoutManager;
+        public StackLayoutManager carouselLayoutManager;
         public RecyclerView carouselRecyclerView;
 
         public ViewHolderCarousel(@NonNull View view, ArrayList<CategoryArticle> articles) {
             super(view);
             carouselRecyclerView = view.findViewById(R.id.carouselView);
-            carouselLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false);
+            StackLayoutManager.ScrollOrientation orientation = StackLayoutManager.ScrollOrientation.RIGHT_TO_LEFT;
+            carouselLayoutManager = new StackLayoutManager(orientation);
             carouselAdapter = new CategoryCarouselAdapter(view.getContext(), articles);
         }
 
@@ -129,7 +131,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         } else if (holder.getItemViewType() == 1) {
 
             ViewHolderCarousel viewHolderCarousel = (ViewHolderCarousel) holder;
-            ViewCompat.setNestedScrollingEnabled(viewHolderCarousel.carouselRecyclerView, false);
             viewHolderCarousel.carouselRecyclerView.setLayoutManager(viewHolderCarousel.carouselLayoutManager);
             viewHolderCarousel.carouselRecyclerView.setAdapter(viewHolderCarousel.carouselAdapter);
 
