@@ -4,13 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragments.HomeFragment">
+    android:background="#FFFFFF"
+    tools:context=".fragments.LifestyleFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lifestyleView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ECECEC"
+        android:background="#FFFFFF"
         android:padding="4dp"
         android:scrollbars="vertical">
 

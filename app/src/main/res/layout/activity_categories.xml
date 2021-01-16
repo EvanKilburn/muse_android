@@ -18,13 +18,11 @@
             app:srcCompat="@drawable/muse_image" />
     </androidx.cardview.widget.CardView>
 
-    <androidx.viewpager.widget.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.example.muse_android.CustomizedViewPager xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="648dp"
-        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="-2dp"
         android:layout_marginTop="85dp"
         android:layout_marginBottom="5dp"
         android:padding="4dp"
@@ -38,6 +36,6 @@
             app:tabGravity="fill"
             app:tabMode="fixed" />
 
-    </androidx.viewpager.widget.ViewPager>
+    </com.example.muse_android.CustomizedViewPager>
 
 </RelativeLayout>

@@ -2,8 +2,7 @@ package com.example.muse_android.requests;
 
 import android.os.AsyncTask;
 
-import com.example.muse_android.CategoriesActivity;
-import com.example.muse_android.R;
+import com.example.muse_android.adapters.CategoryAdapter;
 import com.example.muse_android.fragments.CategoryFragment;
 import com.example.muse_android.objects.CategoryArticle;
 
@@ -77,10 +76,22 @@ public class fetchCategoryData extends AsyncTask {
     protected void onPostExecute(Object o) {
         super.onPostExecute(o);
 
-        for (int i = 0; i < categoryArticles.size(); i++){
-            this.fragment.articles.add(categoryArticles.get(i));
+        if (this.pageNumber != 1) {
+
+            for (int i = 0; i < categoryArticles.size(); i++) {
+                fragment.articles.add(categoryArticles.get(i));
+            }
+            fragment.adapter.notifyDataSetChanged();
+            fragment.canScroll = true;
+
+        } else {
+
+            fragment.carouselArticles.clear();
+            for (int i = 0; i < categoryArticles.size(); i++) {
+                fragment.carouselArticles.add(categoryArticles.get(i));
+            }
+            ((CategoryAdapter) fragment.adapter).viewHolderCarousel.getCarouselAdapter().notifyDataSetChanged();
+
         }
-        this.fragment.adapter.notifyDataSetChanged();
-        this.fragment.canScroll = true;
     }
 }

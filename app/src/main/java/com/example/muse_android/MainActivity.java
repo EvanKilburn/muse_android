@@ -90,9 +90,4 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //            toCategoriesPage(this.findViewById(R.id.mainLayout).getRootView());
     }
-
-    public void toCategoriesPage(View view) {
-        Intent intent = new Intent(MainActivity.this, CategoriesActivity.class);
-        startActivity(intent);
-    }
 }
