@@ -1,5 +1,7 @@
 package com.example.muse_android.objects;
 
+import com.example.muse_android.adapters.CategoryAdapter;
+
 public class CategoryArticle {
 
     private String id;
@@ -7,6 +9,14 @@ public class CategoryArticle {
     private String image;
     private String author;
     private String categoryName;
+
+    public CategoryArticle() {
+        this.id = null;
+        this.title = null;
+        this.image = null;
+        this.author = null;
+        this.categoryName = null;
+    }
 
     public CategoryArticle(String id, String title, String image, String author, String categoryName) {
         this.id = id;

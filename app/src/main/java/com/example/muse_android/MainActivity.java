@@ -9,13 +9,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.muse_android.adapters.ArticleAdapter;
 import com.example.muse_android.adapters.FullArticleAdapter;
 import com.example.muse_android.objects.Article;
 
+import com.example.muse_android.objects.CategoryArticle;
 import com.example.muse_android.requests.fetchArticleData;
+import com.example.muse_android.requests.fetchCategoryData;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -34,17 +37,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
 
+        final ProgressBar progressBar = findViewById(R.id.progressBar);
+        final int maxProgress = 10000;
+        final int progressIncrement = 10;
+
         Thread welcomeThread = new Thread() {
 
             @Override
             public void run() {
                 try {
                     super.run();
-                    sleep(10000);  //Delay of 10 seconds
+                    progressBar.setMax(maxProgress);
+                    for(int i = 0; i < maxProgress; i+=progressIncrement) {
+                        sleep(progressIncrement);
+                        progressBar.setProgress(i);
+                    }
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 } finally {
-
                     Intent i = new Intent(MainActivity.this,
                             CategoriesActivity.class);
                     startActivity(i);
@@ -54,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         };
         welcomeThread.start();
     }
+
 //    protected void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main);
@@ -89,10 +100,5 @@ public class MainActivity extends AppCompatActivity {
 //            e.printStackTrace();
 //        }
 //            toCategoriesPage(this.findViewById(R.id.mainLayout).getRootView());
-    }
-
-    public void toCategoriesPage(View view) {
-        Intent intent = new Intent(MainActivity.this, CategoriesActivity.class);
-        startActivity(intent);
     }
 }

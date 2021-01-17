@@ -8,12 +8,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.muse_android.adapters.CategoryFragmentAdapter;
+import com.example.muse_android.objects.CategoryArticle;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
 
 public class CategoriesActivity extends AppCompatActivity {
 
     private static String [] categories = {"Home", "Lifestyle", "Fashion", "Music", "Arts"};
-    private ViewPager viewPager;
+    private CustomizedViewPager viewPager;
     private CategoryFragmentAdapter adapter;
 
     @Override
@@ -22,8 +25,9 @@ public class CategoriesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_categories);
 
         viewPager = findViewById(R.id.pager);
-        adapter = new CategoryFragmentAdapter(getSupportFragmentManager());
+        adapter = new CategoryFragmentAdapter(getSupportFragmentManager(), this);
         viewPager.setAdapter(adapter);
+        disableSwipe();
     }
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -33,6 +37,14 @@ public class CategoriesActivity extends AppCompatActivity {
 
     public static String[] getCategories() {
         return categories;
+    }
+
+    public void enableSwipe() {
+        viewPager.disableScroll(false);
+    }
+
+    public void disableSwipe() {
+        viewPager.disableScroll(true);
     }
 
     public void toArticlePage(View view) {
