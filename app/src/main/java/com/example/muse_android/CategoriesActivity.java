@@ -8,7 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.muse_android.adapters.CategoryFragmentAdapter;
+import com.example.muse_android.objects.CategoryArticle;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
 
 public class CategoriesActivity extends AppCompatActivity {
 
