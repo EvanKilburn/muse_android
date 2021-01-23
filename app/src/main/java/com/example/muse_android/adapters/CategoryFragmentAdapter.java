@@ -14,31 +14,18 @@ import com.example.muse_android.fragments.FashionFragment;
 import com.example.muse_android.fragments.HomeFragment;
 import com.example.muse_android.fragments.LifestyleFragment;
 import com.example.muse_android.fragments.MusicFragment;
+import com.example.muse_android.objects.AllCategory;
 
 public class CategoryFragmentAdapter extends FragmentPagerAdapter {
 
-    CategoriesActivity categoriesActivity;
-
-    public CategoryFragmentAdapter(@NonNull FragmentManager fm, CategoriesActivity categoriesActivity) {
+    public CategoryFragmentAdapter(@NonNull FragmentManager fm) {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        this.categoriesActivity = categoriesActivity;
     }
 
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        CategoryFragment pageFragment = null;
-        if (position == 0) {
-            pageFragment = new HomeFragment(this.categoriesActivity);
-        } else if (position == 1) {
-            pageFragment = new LifestyleFragment(this.categoriesActivity);
-        } else if (position == 2) {
-            pageFragment = new FashionFragment(this.categoriesActivity);
-        } else if (position == 3) {
-            pageFragment = new MusicFragment(this.categoriesActivity);
-        } else if (position == 4) {
-            pageFragment = new ArtsFragment(this.categoriesActivity);
-        }
+        CategoryFragment pageFragment = AllCategory.fragments[position];
         position = position + 1;
         return pageFragment;
     }

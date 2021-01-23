@@ -14,11 +14,6 @@ public class FashionFragment extends CategoryFragment {
 
     public FashionFragment() {
 
-    }
-
-    public FashionFragment(CategoriesActivity categoriesActivity) {
-        this.categoriesActivity = categoriesActivity;
-
         this.categoryName = "Fashion";
         this.titles[0] = "Recent";
         this.titles[1] = "More";

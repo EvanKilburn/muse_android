@@ -14,11 +14,6 @@ public class ArtsFragment extends CategoryFragment {
 
     public ArtsFragment() {
 
-    }
-
-    public ArtsFragment(CategoriesActivity categoriesActivity) {
-        this.categoriesActivity = categoriesActivity;
-
         this.categoryName = "Arts";
         this.titles[0] = "Recent";
         this.titles[1] = "More";

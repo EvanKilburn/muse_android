@@ -17,6 +17,7 @@ import com.example.muse_android.CategoriesActivity;
 import com.example.muse_android.R;
 import com.example.muse_android.adapters.CategoryAdapter;
 import com.example.muse_android.adapters.CategoryCarouselAdapter;
+import com.example.muse_android.objects.AllCategory;
 import com.example.muse_android.objects.CategoryArticle;
 import com.example.muse_android.requests.fetchCategoryData;
 
@@ -27,8 +28,6 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public abstract class CategoryFragment extends Fragment {
-
-    protected CategoriesActivity categoriesActivity;
 
     public ArrayList<CategoryArticle> articles = new ArrayList<>();
     public ArrayList<CategoryArticle> carouselArticles = new ArrayList<>();
@@ -42,6 +41,7 @@ public abstract class CategoryFragment extends Fragment {
     public boolean canScroll = true;
     protected String categoryName;
     protected int pageNumber = 2;
+    protected int index = 0;
     protected int layoutName;
     protected int recycler;
 
@@ -50,11 +50,20 @@ public abstract class CategoryFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        fetchCategoryData processCarousel = new fetchCategoryData(this.categoryName, 1, this);
-        processCarousel.execute();
 
-        fetchCategoryData process = new fetchCategoryData(this.categoryName, this.pageNumber, this);
-        process.execute();
+        for (int i = 0; i < CategoriesActivity.getCategories().length; i++) {
+            if (CategoriesActivity.getCategories()[i].equals(categoryName)) {
+                index = i;
+            }
+        }
+
+        for (int j = 0; j < carouselSize; j++) {
+            carouselArticles.add(AllCategory.allCategory[index].get(j));
+        }
+
+        for (int k = carouselSize + 1; k < 2 * carouselSize; k++) {
+            articles.add(AllCategory.allCategory[index].get(k));
+        }
     }
 
     @Override
@@ -64,7 +73,7 @@ public abstract class CategoryFragment extends Fragment {
 
         recyclerView = view.findViewById(this.recycler);
         layoutManager = new LinearLayoutManager(view.getContext());
-        adapter = new CategoryAdapter(this.categoriesActivity, articles, carouselArticles, titles, view.getContext());
+        adapter = new CategoryAdapter(articles, carouselArticles, titles, view.getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
@@ -76,7 +85,8 @@ public abstract class CategoryFragment extends Fragment {
                 if (!recyclerView.canScrollVertically(1) && canScroll) {
                     pageNumber += 1;
                     canScroll = false;
-                    fetchCategoryData process = new fetchCategoryData(categoryName, pageNumber, getThis());
+
+                    fetchCategoryData process = new fetchCategoryData(categoryName, pageNumber, 10, index);
                     process.execute();
                 }
             }
