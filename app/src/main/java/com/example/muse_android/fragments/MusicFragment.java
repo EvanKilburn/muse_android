@@ -14,11 +14,6 @@ public class MusicFragment extends CategoryFragment {
 
     public MusicFragment() {
 
-    }
-
-    public MusicFragment(CategoriesActivity categoriesActivity) {
-        this.categoriesActivity = categoriesActivity;
-
         this.categoryName = "Music";
         this.titles[0] = "Recent";
         this.titles[1] = "More";

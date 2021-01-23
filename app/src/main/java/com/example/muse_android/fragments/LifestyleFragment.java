@@ -16,11 +16,6 @@ public class LifestyleFragment extends CategoryFragment {
 
     public LifestyleFragment() {
 
-    }
-
-    public LifestyleFragment(CategoriesActivity categoriesActivity) {
-        this.categoriesActivity = categoriesActivity;
-
         this.categoryName = "Lifestyle";
         this.titles[0] = "Recent";
         this.titles[1] = "More";

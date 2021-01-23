@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.muse_android.adapters.ArticleAdapter;
 import com.example.muse_android.adapters.FullArticleAdapter;
+import com.example.muse_android.objects.AllCategory;
 import com.example.muse_android.objects.Article;
 
 import com.example.muse_android.objects.CategoryArticle;
@@ -37,8 +38,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
 
+        new AllCategory();
+
         final ProgressBar progressBar = findViewById(R.id.progressBar);
-        final int maxProgress = 10000;
+        final int maxProgress = 20000;
         final int progressIncrement = 10;
 
         Thread welcomeThread = new Thread() {
@@ -51,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
                     for(int i = 0; i < maxProgress; i+=progressIncrement) {
                         sleep(progressIncrement);
                         progressBar.setProgress(i);
+                    }
+                    while(AllCategory.allCategory == null || AllCategory.allCategory[AllCategory.allCategory.length - 1].size() == 0) {
+                        sleep(progressIncrement);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

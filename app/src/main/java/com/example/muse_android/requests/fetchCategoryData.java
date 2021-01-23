@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 
 import com.example.muse_android.adapters.CategoryAdapter;
 import com.example.muse_android.fragments.CategoryFragment;
+import com.example.muse_android.objects.AllCategory;
 import com.example.muse_android.objects.CategoryArticle;
 
 import org.json.JSONArray;
@@ -21,14 +22,16 @@ public class fetchCategoryData extends AsyncTask {
     ArrayList<CategoryArticle> categoryArticles = new ArrayList<>();
     String categoryName;
     int pageNumber;
-    CategoryFragment fragment;
+    int perPage;
+    int index;
     static String [][] categoryNumbers = {{"Home", "1133"}, {"Arts", "15"}, {"Entertainment", "14"}, {"Lifestyle", "17"},
             {"Fashion", "16"}, {"Music", "1132"}};
 
-    public fetchCategoryData(String categoryName, int pageNumber, CategoryFragment fragment) {
+    public fetchCategoryData(String categoryName, int pageNumber, int perPage, int index) {
         this.categoryName = categoryName;
         this.pageNumber = pageNumber;
-        this.fragment = fragment;
+        this.perPage = perPage;
+        this.index = index;
     }
 
     @Override
@@ -47,7 +50,7 @@ public class fetchCategoryData extends AsyncTask {
                 }
                 i++;
             }
-            URL urlT = new URL("http://www.muse-magazine.com/wp-json/wp/v2/posts?categories=" + categoryNumber + "&page=" + this.pageNumber);
+            URL urlT = new URL("http://www.muse-magazine.com/wp-json/wp/v2/posts?categories=" + categoryNumber + "&page=" + this.pageNumber + "&per_page=" + this.perPage);
             HttpURLConnection httpURLConnectionT = (HttpURLConnection) urlT.openConnection();
             InputStream inputStreamT = httpURLConnectionT.getInputStream();
             BufferedReader bufferedReaderT = new BufferedReader(new InputStreamReader(inputStreamT));
@@ -76,22 +79,19 @@ public class fetchCategoryData extends AsyncTask {
     protected void onPostExecute(Object o) {
         super.onPostExecute(o);
 
-        if (this.pageNumber != 1) {
+        for (int i = 0; i < categoryArticles.size(); i++) {
+            AllCategory.allCategory[index].add(categoryArticles.get(i));
 
-            for (int i = 0; i < categoryArticles.size(); i++) {
-                fragment.articles.add(categoryArticles.get(i));
+            if (pageNumber != 1) {
+                AllCategory.fragments[index].articles.add(categoryArticles.get(i));
             }
-            fragment.adapter.notifyDataSetChanged();
-            fragment.canScroll = true;
-
-        } else {
-
-            fragment.carouselArticles.clear();
-            for (int i = 0; i < categoryArticles.size(); i++) {
-                fragment.carouselArticles.add(categoryArticles.get(i));
-            }
-            ((CategoryAdapter) fragment.adapter).viewHolderCarousel.getCarouselAdapter().notifyDataSetChanged();
-
         }
+
+        if (pageNumber != 1) {
+            AllCategory.fragments[index].adapter.notifyDataSetChanged();
+            System.out.println("notified");
+        }
+        AllCategory.fragments[index].canScroll = true;
+        System.out.println(categoryName + " " + AllCategory.allCategory[index].size());
     }
 }

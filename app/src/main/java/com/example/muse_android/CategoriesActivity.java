@@ -25,7 +25,7 @@ public class CategoriesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_categories);
 
         viewPager = findViewById(R.id.pager);
-        adapter = new CategoryFragmentAdapter(getSupportFragmentManager(), this);
+        adapter = new CategoryFragmentAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         disableSwipe();
     }

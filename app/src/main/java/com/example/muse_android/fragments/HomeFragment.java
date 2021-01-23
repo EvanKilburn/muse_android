@@ -14,11 +14,6 @@ public class HomeFragment extends CategoryFragment {
 
     public HomeFragment() {
 
-    }
-
-    public HomeFragment(CategoriesActivity categoriesActivity) {
-        this.categoriesActivity = categoriesActivity;
-
         this.categoryName = "Home";
         this.titles[0] = "Editor's Pick";
         this.titles[1] = "More";

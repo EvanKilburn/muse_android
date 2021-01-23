@@ -24,16 +24,13 @@ import java.util.ArrayList;
 
 public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private CategoriesActivity categoriesActivity;
     public ArrayList<CategoryArticle> articles;
     public ArrayList<CategoryArticle> carouselArticles;
     private String [] titles;
     Context c;
     public ViewHolderCarousel viewHolderCarousel;
 
-    public CategoryAdapter (CategoriesActivity categoriesActivity, ArrayList<CategoryArticle> articles,
-                            ArrayList<CategoryArticle> carouselArticles, String [] titles, Context c) {
-        this.categoriesActivity = categoriesActivity;
+    public CategoryAdapter (ArrayList<CategoryArticle> articles, ArrayList<CategoryArticle> carouselArticles, String [] titles, Context c) {
         this.articles = articles;
         this.carouselArticles = carouselArticles;
         this.titles = titles;
@@ -160,7 +157,4 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return articles.size() + 3;
     }
 
-    public CategoriesActivity getCategoriesActivity() {
-        return categoriesActivity;
-    }
 }
